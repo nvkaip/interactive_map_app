@@ -2,13 +2,12 @@ package com.test_tasks.interactive_map_app.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
@@ -31,11 +30,8 @@ public class Property {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "property_images",
-            joinColumns = {@JoinColumn(name = "property_id")},
-            inverseJoinColumns = {@JoinColumn(name = "image")})
-    private List images;
+    @ElementCollection
+    private List<String> images;//TODO figure this out
 
     @Column(name = "address")
     private String address;
@@ -43,6 +39,9 @@ public class Property {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "coordinate_id")
     private Coordinate coordinate;
+
+    public Property() {
+    }
 
     public Property(Integer numberOfRooms, Double area, String description, String address, Coordinate coordinate) {
         this.numberOfRooms = numberOfRooms;

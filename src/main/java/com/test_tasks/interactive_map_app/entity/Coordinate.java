@@ -21,6 +21,9 @@ public class Coordinate {
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    public Coordinate() {
+    }
+
     public Coordinate(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
