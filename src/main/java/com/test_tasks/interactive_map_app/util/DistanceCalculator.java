@@ -10,7 +10,7 @@ public class DistanceCalculator {
      * @param unit "K" - for Kilometers, "N" - for Nautical Miles, any other - for Miles
      * @return double type of distance in chosen units
      */
-    private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+    public static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         }

@@ -31,7 +31,7 @@ public class Property {
     private String description;
 
     @ElementCollection
-    private List<String> images;//TODO figure this out
+    private List<String> images;
 
     @Column(name = "address")
     private String address;
