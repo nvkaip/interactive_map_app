@@ -17,7 +17,7 @@ import java.util.Objects;
 @Table(name = "property")
 public class Property {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -53,6 +53,10 @@ public class Property {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getNumberOfRooms() {

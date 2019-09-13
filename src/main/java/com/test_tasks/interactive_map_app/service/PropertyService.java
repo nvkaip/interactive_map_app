@@ -18,4 +18,5 @@ public interface PropertyService {
     void updateProperty(Property property);
     @PreAuthorize("isAuthenticated()")
     void removeProperty(Property property);
+    void removeAll();
 }

@@ -12,4 +12,5 @@ public interface CoordinateService {
     Optional<Coordinate> getCoordinateById(Long coordinateId);
     @PreAuthorize("isAuthenticated()")
     void removeCoordinate(Coordinate coordinate);
+    void removeAll();
 }

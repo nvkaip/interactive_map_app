@@ -60,4 +60,9 @@ public class PropertyServiceImpl implements PropertyService {
     public void removeProperty(Property property) {
         propertyRepository.delete(property);
     }
+
+    @Override
+    public void removeAll() {
+        propertyRepository.deleteAll();
+    }
 }

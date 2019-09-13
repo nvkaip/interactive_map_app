@@ -6,12 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "coordinate")
 public class Coordinate {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -35,6 +36,21 @@ public class Coordinate {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordinate that = (Coordinate) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(latitude, that.latitude) &&
+                Objects.equals(longitude, that.longitude);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, latitude, longitude);
     }
 
     @Override
