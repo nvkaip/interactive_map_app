@@ -59,7 +59,7 @@ public class InteractiveMapAppApplicationTests {
     }
 
     @After
-    public void clearUp() {
+    public void tearDown() {
         propertyService.removeAll();
         coordinateService.removeAll();
     }
@@ -81,7 +81,7 @@ public class InteractiveMapAppApplicationTests {
     }
 
     @Test
-    public void getPropertiesInRadius() {//TODO test real coordinates
+    public void getPropertiesInRadius() {
         List<Property> expected = propertyList;
         expected.remove(2);
         List<Property> result =

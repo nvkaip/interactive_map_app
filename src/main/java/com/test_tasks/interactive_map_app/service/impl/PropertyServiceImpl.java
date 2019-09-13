@@ -52,13 +52,18 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public void updateProperty(Property property) {
-        propertyRepository.save(property);
+    public Property updateProperty(Property property) {
+        return propertyRepository.save(property);
     }
 
     @Override
     public void removeProperty(Property property) {
         propertyRepository.delete(property);
+    }
+
+    @Override
+    public void removePropertyById(Long propertyId) {
+        propertyRepository.deleteById(propertyId);
     }
 
     @Override
