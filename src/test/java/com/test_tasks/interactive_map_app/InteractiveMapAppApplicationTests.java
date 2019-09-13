@@ -35,25 +35,25 @@ public class InteractiveMapAppApplicationTests {
 
     @Before
     public void setUp() {
-        Coordinate coordinate = new Coordinate(32.9697, -96.80322);
+        Coordinate coordinate = new Coordinate(50.434585, 30.546012);
         coordinateList.add(coordinate);
         coordinateService.saveCoordinate(coordinate);
-        coordinate = new Coordinate(29.46786, -98.53506);
+        coordinate = new Coordinate(50.436203, 30.553883);
         coordinateList.add(coordinate);
         coordinateService.saveCoordinate(coordinate);
-        coordinate = new Coordinate(30.9697, -97.80322);
+        coordinate = new Coordinate(50.359571, 30.937878);
         coordinateList.add(coordinate);
         coordinateService.saveCoordinate(coordinate);
         Property property = new Property(3, 78.8, "Good property",
-                "Kiev", coordinateService.getAll().get(0));
+                "ул. Лейпцигская, 4/37, Киев, 02000", coordinateService.getAll().get(0));
         propertyList.add(property);
         propertyService.saveProperty(property);
         property = new Property(2, 58.8, "Not bad property",
-                "Kiev", coordinateService.getAll().get(1));
+                "ул. Лаврская, 17, Киев, 02000", coordinateService.getAll().get(1));
         propertyList.add(property);
         propertyService.saveProperty(property);
         property = new Property(1, 38.8, "Just a property",
-                "Kiev", coordinateService.getAll().get(2));
+                "ул. Киевский шлях, 41, Борисполь, 08300", coordinateService.getAll().get(2));
         propertyList.add(property);
         propertyService.saveProperty(property);
     }
@@ -83,38 +83,30 @@ public class InteractiveMapAppApplicationTests {
     @Test
     public void getPropertiesInRadius() {//TODO test real coordinates
         List<Property> expected = propertyList;
-        expected.remove(1);
+        expected.remove(2);
         List<Property> result =
-                propertyService.getPropertiesInRadius(32.9697, -96.80322, 250, pageableProperties);
+                propertyService.getPropertiesInRadius(50.447721, 30.522350, 10, pageableProperties);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void updateProperty() {
-        Property expected = new Property(2, 48.8, "Nice property",
-                "Lviv", coordinateService.getAll().get(2));
-        Long propertyId = propertyList.get(2).getId();
-        Optional<Property> result = propertyService.getPropertyById(propertyId);
-        if (result.isPresent()){
-            Property property = result.get();
-            property.setNumberOfRooms(2);
-            property.setArea(48.8);
-            property.setDescription("Nice property");
-            property.setAddress("Lviv");
-            propertyService.updateProperty(property);
-        }
-        expected.setId(propertyId);
-        result = propertyService.getPropertyById(propertyId);
+        Property expected = propertyList.get(2);
+        expected.setNumberOfRooms(2);
+        expected.setArea(48.8);
+        expected.setDescription("Nice property");
+        propertyService.updateProperty(expected);
+        Optional<Property> result = propertyService.getPropertyById(expected.getId());
         Assert.assertEquals(Optional.of(expected), result);
     }
 
     @Test
     public void removeProperty() {
-        Coordinate coordinate = new Coordinate(39.46786, -88.53506);
+        Coordinate coordinate = new Coordinate(50.459642, 30.370780);
         coordinateList.add(coordinate);
         coordinateService.saveCoordinate(coordinate);
         Property property = new Property(4, 178.8, "VIP property",
-                "Borispil", coordinate);
+                "24A, ул. Беличанска, 24А, Киев, 02000", coordinate);
         propertyList.add(property);
         propertyService.saveProperty(property);
         Optional<Property> result = propertyService.getPropertyById(property.getId());
