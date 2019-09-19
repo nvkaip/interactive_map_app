@@ -24,6 +24,11 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public List<Property> getAll() {
+        return propertyRepository.findAll();
+    }
+
+    @Override
     public Page<Property> getAll(Pageable pageable) {
         return propertyRepository.findAll(pageable);
     }

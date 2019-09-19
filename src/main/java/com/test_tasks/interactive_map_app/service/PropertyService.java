@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PropertyService {
+    List<Property> getAll();
     Page<Property> getAll(Pageable pageable);
     void saveProperty(Property property);
     Optional<Property> getPropertyById(Long propertyId);

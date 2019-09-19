@@ -3,8 +3,7 @@ package com.test_tasks.interactive_map_app.controller;
 import com.test_tasks.interactive_map_app.entity.Property;
 import com.test_tasks.interactive_map_app.service.CoordinateService;
 import com.test_tasks.interactive_map_app.service.PropertyService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/property")
 public class PropertyController {
 
-    private final Logger logger = LoggerFactory.getLogger(PropertyController.class);
     private PropertyService propertyService;
     private CoordinateService coordinateService;
 
@@ -30,10 +29,11 @@ public class PropertyController {
         this.coordinateService = coordinateService;
     }
 
-    @GetMapping("/all")
-    public Page<Property> getAllProperties(){
-        logger.info("Got a page of properties");
-        return propertyService.getAll(PageRequest.of(0, 2));
+    @GetMapping("/all/{page}{size}")
+    public Page<Property> getAllProperties(@PathVariable("page") Integer page,
+                                           @PathVariable("size") Integer size){
+        log.info("Got a page of properties");
+        return propertyService.getAll(PageRequest.of(page, size));
     }
 
     @PutMapping("/update")
